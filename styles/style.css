@@ -293,7 +293,7 @@ html {
   height: 400px;
   width: 500px;
   border: rgb(238, 237, 223) 2px solid;
-  background-image: url("/ABELLAHAIRSTUDIOS/expandingBox/images/idea6.png");
+  background-image: url("../images/idea6.png");
   background-size:  80% 100%;
   background-repeat: no-repeat;
   border-radius: 35px;
