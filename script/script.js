@@ -338,7 +338,9 @@ booking.addEventListener('click',()=>{
     
 })
 
-contactbutton.addEventListener('click',()=>{
+contactbutton.addEventListener('click',event=>{
+    const target = event.target.getAttribute('data-target');
+    history.pushState({ page: target }, '', `/${target}`);
     bookingpage()
     toggleMenu()
 })
@@ -350,7 +352,9 @@ servicebutton.addEventListener('click', event => {
     toggleMenu();
   });
 
-homebutton.addEventListener('click',()=>{
+homebutton.addEventListener('click',event=>{
+    const target = event.target.getAttribute('data-target');
+    history.pushState({ page: target }, '', `/${target}`);
     homenavigation()
     toggleMenu()
 })
