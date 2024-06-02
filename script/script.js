@@ -343,10 +343,12 @@ contactbutton.addEventListener('click',()=>{
     toggleMenu()
 })
 
-servicebutton.addEventListener('click',()=>{
-    servicepage()
-    toggleMenu()
-})
+servicebutton.addEventListener('click', event => {
+    const target = event.target.getAttribute('data-target');
+    history.pushState({ page: target }, '', `/${target}`);
+    servicepage();
+    toggleMenu();
+  });
 
 homebutton.addEventListener('click',()=>{
     homenavigation()
