@@ -33,7 +33,7 @@ setTimeout(() => {
 
 
     mainbody.style.display='block'
-    
+    footer.style.display='grid'
     heading.forEach(heading => {
         heading.style.opacity = "1";
     });
@@ -41,6 +41,8 @@ setTimeout(() => {
 
 setTimeout(() => {
     mainbody.style.opacity="1"
+    footer.style.opacity="1"
+
     smallbox.style.transform = "translateY(-100%)";
 }, 3800);
 
@@ -100,7 +102,22 @@ setTimeout(() => {
 
     const speed = .5;
     const smallboxHeight = smallbox.offsetHeight;
-    smallbox.style.transition  = "all 1s ease"
+    const mediaQuery = window.matchMedia("(max-width: 600px)");
+
+    function updateSpeed() {
+        if (mediaQuery.matches) {
+            smallbox.style.transition  = "all .1s ease" // Speed for mobile devices
+        } else {
+            smallbox.style.transition  = "all 1s ease" // Speed for non-mobile devices
+        }
+    }
+    // Initial speed
+    updateSpeed();
+
+    // Listen for changes in the media query match status
+    mediaQuery.addEventListener('change', updateSpeed);
+
+
     window.addEventListener('scroll', function () {
       // Calculate the new position of the parallax element based on scroll position
       const yPos = (window.scrollY * speed)+smallboxHeight;
@@ -135,11 +152,13 @@ function basenavigation(){
     welcome.style.transition= 'opacity 1s ease';
 
     mainbody.style.opacity='0'
+    footer.style.opacity='0'
     menu.style.opacity="0"
 
 
     setTimeout(() => {
         mainbody.style.display='none'
+        footer.style.display='none'
         menu.style.visibility = 'hidden'
 
     }, 1000);
@@ -157,19 +176,57 @@ function basenavigation(){
 }
 
 
+function adjustFooterMargin() {
+; 
+    const viewportHeight = window.innerHeight;
+    let contentHeight
+    let margin = 0;
+    
+    if (window.getComputedStyle(contactpage).display=='block'){
+        contentHeight=contactpage.scrollHeight
+            margin = contentHeight- viewportHeight + 60; 
+        
+    }
+
+    
+    
+    if (window.getComputedStyle(servicepagecontainer).display=='block'){
+        contentHeight=servicepagecontainer.scrollHeight
+            margin = contentHeight- viewportHeight + 200; 
+            
+    }
+
+        
+ 
+    
+
+    footer.style.marginTop = `${margin}px`;
+}
+
+
+
+
+
+window.addEventListener('resize', adjustFooterMargin);
+
+
 function homenavigation(){
     pagetransition()
+    setTimeout(() => {
+        adjustFooterMargin();
+    }, 4100);
     contactbutton.style.display='block'
     homebutton.style.display='none'
     servicebutton.style.display='block'
     contactpage.style.display='none'
     servicepagecontainer.style.display='none'
-
-
+    mainbody.style.display='none'
+    footer.style.display='none'
+    mainbody.style.opacity='0'
+    footer.style.opacity='0'
     welcome.style.transition= 'opacity 6s ease';
-    
-    mainbody.style.display='block'
-    
+    mainbody.style.transition = "all 2s ease"
+
     menu.style.opacity="0"
 
     setTimeout(() => {
@@ -197,8 +254,20 @@ function homenavigation(){
         heading.forEach(heading => {
             heading.style.opacity = "1";
         });
-        mainbody.style.opacity='1'
+        mainbody.style.display='block'
+        footer.style.display='grid'
+        footer.style.opacity='1'
+
     }, 4000);
+
+    setTimeout(() => {
+        mainbody.style.opacity='1'
+
+    }, 4200);
+
+    setTimeout(() => {
+        mainbody.style.transition = "all .5s ease"
+    }, 4400);
 
 
  
@@ -206,6 +275,9 @@ function homenavigation(){
 
 function bookingpage(){
     basenavigation()
+    setTimeout(() => {
+        adjustFooterMargin();
+    }, 4100);
     contactbutton.style.display='none'
     homebutton.style.display='block'
     servicebutton.style.display='block'
@@ -218,7 +290,8 @@ function bookingpage(){
     
     setTimeout(() => {
         contactpage.style.display='block'
-
+        footer.style.display='grid'
+        footer.style.opacity='1'
     }, 4000);
 
 
@@ -228,6 +301,9 @@ function bookingpage(){
 
 function servicepage(){
     basenavigation()
+    setTimeout(() => {
+        adjustFooterMargin();
+    }, 4100);;
     contactbutton.style.display='block'
     homebutton.style.display='block'
     servicebutton.style.display='none'
@@ -247,7 +323,8 @@ function servicepage(){
 
     setTimeout(() => {
         servicepagecontainer.style.display='block'
-    
+        footer.style.display='grid'
+        footer.style.opacity='1'
     }, 4000);
 }
 
@@ -275,3 +352,7 @@ homebutton.addEventListener('click',()=>{
     homenavigation()
     toggleMenu()
 })
+
+
+document.querySelector('.opening').addEventListener('click', function() {
+    document.getElementById('OpeningTimes').scrollIntoView({ behavior: 'smooth' });});
