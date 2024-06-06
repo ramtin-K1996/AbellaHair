@@ -295,8 +295,7 @@ function bookingpage(){
     }, 4000);
 
 
-    // also include removing the booking button 
-    // also include removing stuff from service page
+   
 }
 
 function servicepage(){
@@ -333,7 +332,9 @@ function servicepage(){
 
 
 
-booking.addEventListener('click',()=>{
+booking.addEventListener('click',event=>{
+    const target = event.currentTarget.getAttribute('data-target');
+    history.pushState({ page: target }, '', `/${target}`);
     bookingpage()
     
 })

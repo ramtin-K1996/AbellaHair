@@ -1,0 +1,14 @@
+[[redirects]]
+  from = "/Contact"
+  to = "/"
+  status = 301
+
+[[redirects]]
+  from = "/Services"
+  to = "/"
+  status = 301
+
+[[redirects]]
+  from = "/Home"
+  to = "/"
+  status = 301
